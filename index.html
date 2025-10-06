@@ -774,6 +774,15 @@
             </div>
         </div>
 
+        <div class="monthly-summary">
+            <h3 style="color: #1E3557; margin-bottom: 25px; text-align: center;">🛍️ Compras que Terminam no Mês</h3>
+            <div id="monthlyPurchasesContent">
+                <div style="text-align: center; color: #666; padding: 40px;">
+                    Nenhuma compra registrada ainda
+                </div>
+            </div>
+        </div>
+
         <div class="installments-ending">
             <h3 style="color: #1E3557; margin-bottom: 25px; text-align: center;">🏁 Parcelas que Terminam</h3>
             <div id="installmentsEndingContent">
@@ -1191,6 +1200,79 @@
             `).join('');
         }
 
+        // Renderizar compras que terminam no mês
+        function renderMonthlyPurchases() {
+            const content = document.getElementById('monthlyPurchasesContent');
+            
+            if (purchases.length === 0) {
+                content.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">Nenhuma compra registrada ainda</div>';
+                return;
+            }
+            
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            
+            // Filtrar compras que terminam no mês atual (excluir recorrentes)
+            const currentMonthPurchases = purchases.filter(purchase => {
+                if (purchase.installments === 'recorrente') return false;
+                return purchase.dates.endMonth === currentMonth && purchase.dates.endYear === currentYear;
+            });
+            
+            if (currentMonthPurchases.length === 0) {
+                content.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">🎉 Nenhuma compra termina este mês!</div>';
+                return;
+            }
+            
+            const totalSavings = currentMonthPurchases.reduce((sum, purchase) => sum + Math.round(purchase.totalValue), 0);
+            const months = [
+                'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+            ];
+            
+            content.innerHTML = `
+                <div class="summary-card">
+                    <div class="summary-header current">
+                        <h4>🎯 ${months[currentMonth]} ${currentYear}</h4>
+                        <div class="summary-badge current">Mês Atual</div>
+                    </div>
+                    <div class="summary-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Compras que terminam</div>
+                            <div class="stat-value">${currentMonthPurchases.length}</div>
+                        </div>
+                        <div class="stat-item highlight">
+                            <div class="stat-label">💸 Você vai economizar</div>
+                            <div class="stat-value large">R$ ${totalSavings.toLocaleString('pt-BR')}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Valor médio por compra</div>
+                            <div class="stat-value">R$ ${Math.round(totalSavings / currentMonthPurchases.length).toLocaleString('pt-BR')}</div>
+                        </div>
+                    </div>
+                    <div class="month-details">
+                        ${currentMonthPurchases.map(purchase => {
+                            const installmentValue = purchase.installments === 1 ? purchase.totalValue : purchase.totalValue / purchase.installments;
+                            return `
+                                <div class="detail-item">
+                                    <div>
+                                        <div class="detail-name">${purchase.itemName}</div>
+                                        <div class="detail-info">
+                                            ${purchase.card} • 
+                                            ${purchase.installments === 1 ? 'À Vista' : 
+                                              purchase.installments + 'x de R$ ' + Math.round(installmentValue).toLocaleString('pt-BR')} • 
+                                            Última parcela: ${purchase.dates.lastInstallment}
+                                        </div>
+                                    </div>
+                                    <div class="detail-value">R$ ${Math.round(purchase.totalValue).toLocaleString('pt-BR')}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
         // Renderizar resumo mensal completo
         function renderMonthlySummary() {
             const content = document.getElementById('monthlySummaryContent');
@@ -1279,7 +1361,7 @@
                                 <div class="stat-value ${isCurrent ? 'large' : ''}">R$ ${group.total.toLocaleString('pt-BR')}</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-label">Valor médio por parcela</div>
+                                <div class="stat-label">Valor médio por compra</div>
                                 <div class="stat-value">R$ ${averageValue.toLocaleString('pt-BR')}</div>
                             </div>
                         </div>
@@ -1401,6 +1483,7 @@
                 updateCharts();
                 renderHistory();
                 renderMonthlySummary();
+                renderMonthlyPurchases();
                 renderInstallmentsEnding();
             }
         }
@@ -1456,6 +1539,7 @@
             updateCharts();
             renderHistory();
             renderMonthlySummary();
+            renderMonthlyPurchases();
             renderInstallmentsEnding();
             
             // Exibir resultado
@@ -1491,7 +1575,8 @@
         createCharts();
         renderHistory();
         renderMonthlySummary();
+        renderMonthlyPurchases();
         renderInstallmentsEnding();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a8966b9267877a',t:'MTc1OTc4OTY2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a8c04f97e0877a',t:'MTc1OTc5MTM3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
