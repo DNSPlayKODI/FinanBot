@@ -17,7 +17,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -29,6 +29,45 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 30px;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00C896 0%, #00a67d 100%);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 200, 150, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 200, 150, 0.4);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
         }
 
         .header h1 {
@@ -65,7 +104,7 @@
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -123,7 +162,7 @@
             color: white;
             padding: 25px;
             border-radius: 15px;
-            margin: 25px 0;
+            margin-top: 25px;
             display: none;
         }
 
@@ -132,125 +171,9 @@
             font-size: 1.3rem;
         }
 
-        .result-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
         .result-item {
-            background: rgba(255,255,255,0.2);
-            padding: 12px;
-            border-radius: 8px;
-        }
-
-        .result-item strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .history-container {
-            margin-top: 30px;
-        }
-
-        .purchase-history {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .empty-history {
-            text-align: center;
-            color: #6c757d;
-            font-style: italic;
-            padding: 40px 20px;
-        }
-
-        .purchase-item {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .purchase-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .purchase-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .purchase-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1E3557;
-            margin: 0;
-        }
-
-        .purchase-value {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #00C896;
-        }
-
-        .purchase-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .purchase-detail {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .purchase-detail-label {
-            font-size: 0.85rem;
-            color: #6c757d;
-            font-weight: 500;
-            margin-bottom: 2px;
-        }
-
-        .purchase-detail-value {
-            font-size: 0.95rem;
-            color: #1E3557;
-            font-weight: 500;
-        }
-
-        .purchase-installments {
-            background: #00C896;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .delete-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .delete-btn:hover {
-            background: #c82333;
-            transform: translateY(-1px);
+            margin: 8px 0;
+            font-size: 1rem;
         }
 
         .charts-container {
@@ -260,14 +183,14 @@
             margin-top: 30px;
         }
 
-        .chart-block {
+        .chart-box {
             background: white;
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .chart-block h3 {
+        .chart-box h3 {
             color: #1E3557;
             margin: 0 0 25px 0;
             font-size: 1.4rem;
@@ -275,76 +198,123 @@
             text-align: center;
         }
 
-        .chart-container {
-            position: relative;
-            height: 400px;
+        .chart-canvas {
+            max-height: 400px;
         }
 
-        .ending-installments-container {
+        .history-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-top: 30px;
         }
 
-        .ending-installments {
-            max-height: 400px;
-            overflow-y: auto;
+        .history-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #00C896;
+            position: relative;
+        }
+
+        .history-item h4 {
+            color: #1E3557;
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .history-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .history-detail {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+            transform: scale(1.1);
+        }
+
+        .installments-ending {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 30px;
         }
 
         .month-group {
             margin-bottom: 25px;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
         .month-header {
-            background: linear-gradient(135deg, #1E3557 0%, #0f1a2e 100%);
-            color: white;
             padding: 15px 20px;
-            border-radius: 12px 12px 0 0;
-            font-size: 1.1rem;
             font-weight: 600;
+            font-size: 1.1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .month-header.current-month {
-            background: linear-gradient(135deg, #00C896 0%, #00a67d 100%);
+        .month-header.current {
+            background: #00C896;
+            color: white;
         }
 
-        .month-header.past-month {
-            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        .month-header.past {
+            background: #6c757d;
+            color: white;
+        }
+
+        .month-header.future {
+            background: #1E3557;
+            color: white;
         }
 
         .month-total {
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .installment-list {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-top: none;
-            border-radius: 0 0 12px 12px;
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         .installment-item {
+            background: #f8f9fa;
             padding: 15px 20px;
-            border-bottom: 1px solid #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
         }
 
         .installment-item:last-child {
             border-bottom: none;
         }
 
-        .installment-item:hover {
-            background: #f8f9fa;
-        }
-
         .installment-info {
-            display: flex;
-            flex-direction: column;
+            flex: 1;
         }
 
         .installment-name {
@@ -354,40 +324,242 @@
         }
 
         .installment-details {
-            font-size: 0.85rem;
-            color: #6c757d;
+            font-size: 0.9rem;
+            color: #666;
         }
 
         .installment-value {
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1rem;
             color: #00C896;
-            font-size: 1rem;
         }
 
-        .status-badge {
+        .badge {
             padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
             font-weight: 600;
             margin-left: 10px;
         }
 
-        .status-current {
+        .badge.current {
             background: #00C896;
             color: white;
         }
 
-        .status-finished {
+        .badge.past {
             background: #6c757d;
             color: white;
         }
 
+        .badge.future {
+            background: #1E3557;
+            color: white;
+        }
+
+        .monthly-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .summary-card {
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #00C896;
+        }
+
+        .summary-header {
+            background: linear-gradient(135deg, #00C896 0%, #00a67d 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-header h4 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .summary-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 25px;
+            background: #f8f9fa;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-item.highlight {
+            background: linear-gradient(135deg, #00C896 0%, #00a67d 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .stat-item.highlight .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1E3557;
+        }
+
+        .stat-value.large {
+            font-size: 2rem;
+        }
+
+        .stat-item.highlight .stat-value {
+            color: white;
+        }
+
+        .month-details {
+            padding: 20px;
+            background: white;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-name {
+            font-weight: 600;
+            color: #1E3557;
+        }
+
+        .detail-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .detail-value {
+            font-weight: 700;
+            color: #00C896;
+            font-size: 1.1rem;
+        }
+
         .footer {
             text-align: center;
-            padding: 30px;
             color: #1E3557;
-            font-weight: 500;
             margin-top: 40px;
+            padding: 20px;
+            font-weight: 500;
+        }
+
+        /* Modo Escuro */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body.dark-mode .header,
+        body.dark-mode .chat-container,
+        body.dark-mode .chart-box,
+        body.dark-mode .history-container,
+        body.dark-mode .installments-ending,
+        body.dark-mode .monthly-summary {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .chat-message,
+        body.dark-mode .history-item,
+        body.dark-mode .installment-item,
+        body.dark-mode .summary-stats,
+        body.dark-mode .month-details {
+            background: #4a5568;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .header h1,
+        body.dark-mode .chart-box h3,
+        body.dark-mode h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select {
+            background: #4a5568;
+            border-color: #718096;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group select:focus {
+            border-color: #00C896;
+            background: #2d3748;
+        }
+
+        body.dark-mode .form-group label {
+            color: #cbd5e0;
+        }
+
+        body.dark-mode .history-detail,
+        body.dark-mode .installment-details,
+        body.dark-mode .detail-info,
+        body.dark-mode .stat-label {
+            color: #a0aec0;
+        }
+
+        body.dark-mode .history-item h4,
+        body.dark-mode .installment-name,
+        body.dark-mode .detail-name {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .footer {
+            color: #cbd5e0;
+        }
+
+        body.dark-mode .stat-item {
+            background: #2d3748;
+            border: 1px solid #4a5568;
+        }
+
+        body.dark-mode .stat-value {
+            color: #e2e8f0;
         }
 
         @media (max-width: 768px) {
@@ -399,12 +571,26 @@
                 grid-template-columns: 1fr;
             }
             
-            .chart-block {
-                min-width: 0;
+            .chart-box {
+                padding: 20px;
             }
-            
-            .header h1 {
-                font-size: 2rem;
+
+            .history-details {
+                grid-template-columns: 1fr;
+            }
+
+            .installment-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .theme-toggle {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -412,7 +598,62 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>💬 FinanBot</h1>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema">🌙</button>
+            <div class="logo-container">
+                <svg class="logo" width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- Gradiente principal -->
+                        <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00C896;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#00a67d;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#1E3557;stop-opacity:1" />
+                        </linearGradient>
+                        
+                        <!-- Gradiente para brilho -->
+                        <radialGradient id="glowGradient" cx="30%" cy="30%">
+                            <stop offset="0%" style="stop-color:rgba(255,255,255,0.4);stop-opacity:1" />
+                            <stop offset="70%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+                        </radialGradient>
+                        
+                        <!-- Sombra -->
+                        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="rgba(0,0,0,0.3)"/>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Círculo de fundo com sombra -->
+                    <circle cx="35" cy="35" r="32" fill="url(#mainGradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1" filter="url(#shadow)"/>
+                    
+                    <!-- Círculo de brilho -->
+                    <circle cx="35" cy="35" r="32" fill="url(#glowGradient)"/>
+                    
+                    <!-- Símbolo $ estilizado -->
+                    <g transform="translate(35,35)">
+                        <!-- Linhas verticais do $ -->
+                        <rect x="-1.5" y="-18" width="3" height="36" fill="white" rx="1.5"/>
+                        
+                        <!-- Parte superior do S -->
+                        <path d="M -12,-8 Q -12,-15 -5,-15 L 8,-15 Q 12,-15 12,-11 Q 12,-8 8,-8 L -8,-8 Q -12,-8 -12,-4 Q -12,0 -8,0 L 8,0 Q 12,0 12,4 Q 12,8 8,8 L -5,8 Q -12,8 -12,15" 
+                              stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    </g>
+                    
+                    <!-- Elementos decorativos flutuantes -->
+                    <circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.6)" opacity="0.8">
+                        <animate attributeName="cy" values="20;18;20" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="50" cy="50" r="1.5" fill="rgba(255,255,255,0.4)" opacity="0.6">
+                        <animate attributeName="cx" values="50;52;50" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="55" cy="25" r="1" fill="rgba(255,255,255,0.7)" opacity="0.9">
+                        <animate attributeName="cy" values="25;23;25" dur="2.5s" repeatCount="indefinite"/>
+                    </circle>
+                    
+                    <!-- Anel externo sutil -->
+                    <circle cx="35" cy="35" r="33" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+                </svg>
+                <h1>FinanBot</h1>
+            </div>
             <p>Seu assistente financeiro inteligente</p>
         </div>
 
@@ -451,7 +692,7 @@
                         <select id="card" required>
                             <option value="">Selecione um cartão</option>
                             <option value="Nubank">Nubank</option>
-                            <option value="Banco Do Brasil">Banco Do Brasil</option>
+                            <option value="Banco do Brasil">Banco do Brasil</option>
                             <option value="C6 Bank">C6 Bank</option>
                             <option value="Havan">Havan</option>
                             <option value="Cartão Luiza">Cartão Luiza</option>
@@ -461,8 +702,15 @@
                             <option value="Inter">Inter</option>
                             <option value="Way">Way</option>
                             <option value="Lojas Renner">Lojas Renner</option>
+                            <option value="Itaú">Itaú</option>
+                            <option value="Santander">Santander</option>
                             <option value="Outro">Outro</option>
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="purchaseDate">Data da Compra</label>
+                        <input type="date" id="purchaseDate" required>
                     </div>
 
                     <div class="form-group">
@@ -475,62 +723,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="purchaseMonth">Mês da Compra</label>
-                        <input type="month" id="purchaseMonth" required>
+                        <label for="installments">Número de Parcelas</label>
+                        <select id="installments" required>
+                            <option value="">Selecione as parcelas</option>
+                            <option value="1">À Vista</option>
+                            <option value="recorrente">Recorrente (mensal)</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="installments">Número de Parcelas</label>
-                        <select id="installments" required>
-                            <option value="">Selecione uma opção</option>
-                            <option value="0">À Vista</option>
-                            <option value="2">2x</option>
-                            <option value="3">3x</option>
-                            <option value="4">4x</option>
-                            <option value="5">5x</option>
-                            <option value="6">6x</option>
-                            <option value="7">7x</option>
-                            <option value="8">8x</option>
-                            <option value="9">9x</option>
-                            <option value="10">10x</option>
-                            <option value="11">11x</option>
-                            <option value="12">12x</option>
-                            <option value="13">13x</option>
-                            <option value="14">14x</option>
-                            <option value="15">15x</option>
-                            <option value="16">16x</option>
-                            <option value="17">17x</option>
-                            <option value="18">18x</option>
-                            <option value="19">19x</option>
-                            <option value="20">20x</option>
-                            <option value="21">21x</option>
-                            <option value="22">22x</option>
-                            <option value="23">23x</option>
-                            <option value="24">24x</option>
-                            <option value="25">25x</option>
-                            <option value="26">26x</option>
-                            <option value="27">27x</option>
-                            <option value="28">28x</option>
-                            <option value="29">29x</option>
-                            <option value="30">30x</option>
-                            <option value="31">31x</option>
-                            <option value="32">32x</option>
-                            <option value="33">33x</option>
-                            <option value="34">34x</option>
-                            <option value="35">35x</option>
-                            <option value="36">36x</option>
-                            <option value="37">37x</option>
-                            <option value="38">38x</option>
-                            <option value="39">39x</option>
-                            <option value="40">40x</option>
-                            <option value="41">41x</option>
-                            <option value="42">42x</option>
-                            <option value="43">43x</option>
-                            <option value="44">44x</option>
-                            <option value="45">45x</option>
-                            <option value="46">46x</option>
-                            <option value="47">47x</option>
-                            <option value="48">48x</option>
+                        <label for="closingDate">Dia do Fechamento (opcional)</label>
+                        <select id="closingDate">
+                            <option value="">Não informado</option>
                         </select>
                     </div>
                 </div>
@@ -540,51 +744,53 @@
 
             <div id="resultContainer" class="result-container">
                 <h3>📋 Resumo da Compra</h3>
-                <div id="resultDetails" class="result-details"></div>
-            </div>
-        </div>
-
-        <div class="history-container">
-            <div class="chart-block">
-                <h3>📝 Histórico de Compras</h3>
-                <div id="purchaseHistory" class="purchase-history">
-                    <div class="empty-history">
-                        <p>Nenhuma compra registrada ainda. Adicione sua primeira compra acima! 🛍️</p>
-                    </div>
-                </div>
+                <div id="resultContent"></div>
             </div>
         </div>
 
         <div class="charts-container">
-            <div class="chart-block">
+            <div class="chart-box">
                 <h3>📊 Gastos por Categoria</h3>
-                <div class="chart-container">
-                    <canvas id="categoryChart"></canvas>
-                </div>
+                <canvas id="categoryChart" class="chart-canvas"></canvas>
             </div>
 
-            <div class="chart-block">
+            <div class="chart-box">
                 <h3>💳 Gastos por Cartão</h3>
-                <div class="chart-container">
-                    <canvas id="cardChart"></canvas>
-                </div>
+                <canvas id="cardChart" class="chart-canvas"></canvas>
             </div>
 
-            <div class="chart-block">
+            <div class="chart-box">
                 <h3>📅 Gastos por Mês</h3>
-                <div class="chart-container">
-                    <canvas id="monthChart"></canvas>
+                <canvas id="monthChart" class="chart-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="monthly-summary">
+            <h3 style="color: #1E3557; margin-bottom: 25px; text-align: center;">💰 Resumo Mensal de Economias</h3>
+            <div id="monthlySummaryContent">
+                <div style="text-align: center; color: #666; padding: 40px;">
+                    Nenhuma compra registrada ainda
                 </div>
             </div>
         </div>
 
-        <div class="ending-installments-container">
-            <div class="chart-block">
-                <h3>🎯 Parcelas que Terminam</h3>
-                <div id="endingInstallments" class="ending-installments">
-                    <div class="empty-history">
-                        <p>Nenhuma parcela registrada ainda! 📋</p>
-                    </div>
+        <div class="installments-ending">
+            <h3 style="color: #1E3557; margin-bottom: 25px; text-align: center;">🏁 Parcelas que Terminam</h3>
+            <div id="installmentsEndingContent">
+                <div style="text-align: center; color: #666; padding: 40px;">
+                    Nenhuma compra registrada ainda
+                </div>
+            </div>
+        </div>
+
+        <div class="history-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h3 style="color: #1E3557; margin: 0;">📋 Histórico de Compras</h3>
+                <button id="downloadBtn" class="submit-btn" style="width: auto; padding: 12px 24px; margin: 0; font-size: 0.9rem; display: none;" onclick="downloadSpreadsheet()">📊 Baixar Planilha</button>
+            </div>
+            <div id="historyContent">
+                <div style="text-align: center; color: #666; padding: 40px;">
+                    Nenhuma compra registrada ainda
                 </div>
             </div>
         </div>
@@ -595,261 +801,164 @@
     </div>
 
     <script>
-        // Array para armazenar todas as compras
+        // Inicialização
         let purchases = JSON.parse(localStorage.getItem('finanbot_purchases')) || [];
+        let savedClosingDates = JSON.parse(localStorage.getItem('finanbot_closing_dates')) || {};
+        let categoryChart, cardChart, monthChart;
 
-        // Dados para os gráficos
-        let categoryData = {
-            'Alimentação': 0,
-            'Transporte': 0,
-            'Lazer': 0,
-            'Eletrônicos': 0,
-            'Outros': 0
+        // Cores dos cartões
+        const cardColors = {
+            'Nubank': '#8A05BE',
+            'Banco do Brasil': '#FFD700',
+            'C6 Bank': '#FF6B00',
+            'Havan': '#E31E24',
+            'Cartão Luiza': '#FF1493',
+            'Cartão Marisa': '#8B4513',
+            'MercadoPago': '#00AAFF',
+            'PicPay': '#11C76F',
+            'Inter': '#FF7A00',
+            'Way': '#6C5CE7',
+            'Lojas Renner': '#E74C3C',
+            'Itaú': '#4169E1',
+            'Santander': '#DC143C',
+            'Outro': '#6C757D'
         };
 
-        let cardData = {
-            'Nubank': 0,
-            'Banco Do Brasil': 0,
-            'C6 Bank': 0,
-            'Havan': 0,
-            'Cartão Luiza': 0,
-            'Cartão Marisa': 0,
-            'MercadoPago': 0,
-            'PicPay': 0,
-            'Inter': 0,
-            'Way': 0,
-            'Lojas Renner': 0,
-            'Outro': 0
-        };
-
-        let monthData = {};
-
-        // Função para salvar no localStorage
-        function savePurchases() {
-            localStorage.setItem('finanbot_purchases', JSON.stringify(purchases));
-        }
-
-        // Função para recalcular os dados dos gráficos
-        function recalculateChartData() {
-            // Zera os dados
-            Object.keys(categoryData).forEach(key => categoryData[key] = 0);
-            Object.keys(cardData).forEach(key => cardData[key] = 0);
-            monthData = {};
-
-            // Recalcula com base nas compras salvas
-            purchases.forEach(purchase => {
-                categoryData[purchase.category] += purchase.totalValue;
-                cardData[purchase.card] += purchase.totalValue;
-                
-                // Calcula gastos mensais baseado nas parcelas
-                if (purchase.installments === 0) {
-                    // Compra à vista - todo o valor no mês da compra
-                    const monthKey = getMonthKey(parseInstallmentDate(purchase.firstInstallment), 0);
-                    if (!monthData[monthKey]) {
-                        monthData[monthKey] = 0;
-                    }
-                    monthData[monthKey] += purchase.totalValue;
-                } else {
-                    // Compra parcelada
-                    const installmentValue = purchase.totalValue / purchase.installments;
-                    const startDate = parseInstallmentDate(purchase.firstInstallment);
-                    
-                    for (let i = 0; i < purchase.installments; i++) {
-                        const monthKey = getMonthKey(startDate, i);
-                        if (!monthData[monthKey]) {
-                            monthData[monthKey] = 0;
-                        }
-                        monthData[monthKey] += installmentValue;
-                    }
-                }
-            });
-        }
-
-        // Função para converter string de data em objeto Date
-        function parseInstallmentDate(dateString) {
-            const [monthName, year] = dateString.split('/');
-            const months = [
-                'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-            ];
-            const monthIndex = months.indexOf(monthName);
-            return new Date(parseInt(year), monthIndex, 1);
-        }
-
-        // Função para gerar chave do mês
-        function getMonthKey(startDate, monthOffset) {
-            const date = new Date(startDate);
-            date.setMonth(date.getMonth() + monthOffset);
-            const months = [
-                'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-                'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
-            ];
-            return `${months[date.getMonth()]}/${date.getFullYear()}`;
-        }
-
-        // Configuração dos gráficos
-        const categoryChart = new Chart(document.getElementById('categoryChart'), {
-            type: 'pie',
-            data: {
-                labels: Object.keys(categoryData),
-                datasets: [{
-                    label: 'Total (R$)',
-                    data: Object.values(categoryData),
-                    backgroundColor: ['#00C896', '#1E3557', '#FFD700', '#DC143C', '#8A2BE2'],
-                    borderColor: '#ffffff',
-                    borderWidth: 3,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            font: {
-                                size: 12
-                            }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.label + ': R$ ' + Math.round(context.raw).toLocaleString('pt-BR');
-                            }
-                        }
-                    }
-                }
+        // Preencher dropdown de parcelas
+        function populateInstallmentsDropdown() {
+            const select = document.getElementById('installments');
+            for (let i = 2; i <= 48; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `${i}x`;
+                select.appendChild(option);
             }
-        });
+        }
 
-        const cardChart = new Chart(document.getElementById('cardChart'), {
-            type: 'pie',
-            data: {
-                labels: Object.keys(cardData),
-                datasets: [{
-                    label: 'Total (R$)',
-                    data: Object.values(cardData),
-                    backgroundColor: [
-                        '#8A05BE', // Nubank - Roxo característico
-                        '#FFD700', // Banco Do Brasil - Amarelo
-                        '#FF6B00', // C6 Bank - Laranja
-                        '#E31E24', // Havan - Vermelho
-                        '#FF1493', // Cartão Luiza - Rosa/Magenta
-                        '#8B4513', // Cartão Marisa - Marrom
-                        '#00AAFF', // MercadoPago - Azul claro
-                        '#11C76F', // PicPay - Verde
-                        '#FF7A00', // Inter - Laranja
-                        '#6C5CE7', // Way - Roxo claro
-                        '#E74C3C', // Lojas Renner - Vermelho
-                        '#6C757D'  // Outro - Cinza
-                    ],
-                    borderColor: '#ffffff',
-                    borderWidth: 3,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 15,
-                            font: {
-                                size: 11
-                            }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.label + ': R$ ' + Math.round(context.raw).toLocaleString('pt-BR');
-                            }
-                        }
-                    }
-                }
+        // Preencher dropdown de dias de fechamento
+        function populateClosingDatesDropdown() {
+            const select = document.getElementById('closingDate');
+            for (let i = 1; i <= 31; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Dia ${i}`;
+                select.appendChild(option);
             }
-        });
+        }
 
-        const monthChart = new Chart(document.getElementById('monthChart'), {
-            type: 'bar',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Total (R$)',
-                    data: [],
-                    backgroundColor: '#1E3557',
-                    borderColor: '#0f1a2e',
-                    borderWidth: 2,
-                    borderRadius: 8,
-                    borderSkipped: false,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return 'R$ ' + Math.round(value).toLocaleString('pt-BR');
-                            }
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            maxRotation: 45,
-                            minRotation: 45
-                        }
-                    }
-                }
-            }
-        });
-
-        // Função para calcular as datas das parcelas
-        function calculateInstallmentDates(billClosed, installments, purchaseMonth) {
-            const [year, month] = purchaseMonth.split('-');
-            const purchaseDate = new Date(parseInt(year), parseInt(month) - 1, 1);
+        // Alternar tema
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
             
-            // Se for à vista (0 parcelas), retorna o mês da compra
-            if (installments === 0) {
-                const months = [
-                    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-                ];
-                const monthName = `${months[purchaseDate.getMonth()]}/${purchaseDate.getFullYear()}`;
-                return {
-                    firstInstallment: monthName,
-                    lastInstallment: monthName
-                };
-            }
+            body.classList.toggle('dark-mode');
             
-            let startMonth, startYear;
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.textContent = '☀️';
+                themeToggle.title = 'Modo claro';
+                localStorage.setItem('finanbot_theme', 'dark');
+            } else {
+                themeToggle.textContent = '🌙';
+                themeToggle.title = 'Modo escuro';
+                localStorage.setItem('finanbot_theme', 'light');
+            }
+        }
+
+        // Carregar tema salvo
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('finanbot_theme');
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeToggle.textContent = '☀️';
+                themeToggle.title = 'Modo claro';
+            }
+        }
+
+        // Baixar planilha
+        function downloadSpreadsheet() {
+            if (purchases.length === 0) return;
+            
+            const headers = [
+                'Item', 'Valor Total', 'Categoria', 'Cartão', 'Data da Compra', 
+                'Fatura Fechada', 'Parcelas', 'Primeira Parcela', 'Última Parcela',
+                'Dia Fechamento', 'Data Registro'
+            ];
+            
+            const csvContent = [
+                headers.join(','),
+                ...purchases.map(purchase => [
+                    `"${purchase.itemName}"`,
+                    purchase.totalValue.toFixed(2).replace('.', ','),
+                    `"${purchase.category}"`,
+                    `"${purchase.card}"`,
+                    `"${new Date(purchase.purchaseDate).toLocaleDateString('pt-BR')}"`,
+                    purchase.billClosed === 'sim' ? 'Sim' : 'Não',
+                    purchase.installments === 'recorrente' ? 'Recorrente' : 
+                    purchase.installments === 1 ? 'À Vista' : `${purchase.installments}x`,
+                    `"${purchase.dates.firstInstallment}"`,
+                    `"${purchase.dates.lastInstallment}"`,
+                    purchase.closingDate || 'Não informado',
+                    `"${new Date(purchase.registrationDate).toLocaleDateString('pt-BR')}"`
+                ].join(','))
+            ].join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            const today = new Date().toLocaleDateString('pt-BR').replace(/\//g, '-');
+            link.setAttribute('href', url);
+            link.setAttribute('download', `FinanBot_Compras_${today}.csv`);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Definir data atual como padrão
+        function setCurrentDate() {
+            const now = new Date();
+            const currentDate = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+            document.getElementById('purchaseDate').value = currentDate;
+        }
+
+        // Calcular datas das parcelas
+        function calculateInstallmentDates(purchaseDate, billClosed, installments, closingDate) {
+            const [year, month, day] = purchaseDate.split('-').map(Number);
+            let startMonth = month - 1; // JavaScript usa 0-11 para meses
+            let startYear = year;
             
             if (billClosed === 'sim') {
-                // Se a fatura já estava fechada, começa no próximo mês
-                startMonth = purchaseDate.getMonth() + 1;
-                startYear = purchaseDate.getFullYear();
-                
+                startMonth++;
                 if (startMonth > 11) {
                     startMonth = 0;
                     startYear++;
                 }
-            } else {
-                // Se a fatura não estava fechada, começa no mês da compra
-                startMonth = purchaseDate.getMonth();
-                startYear = purchaseDate.getFullYear();
             }
             
-            // Calcula o mês da última parcela
+            if (installments === 1) {
+                // À vista - termina no mesmo mês da compra
+                return {
+                    firstInstallment: `${day}/${month}/${year}`,
+                    lastInstallment: `${day}/${month}/${year}`,
+                    endMonth: month - 1,
+                    endYear: year
+                };
+            }
+            
+            if (installments === 'recorrente') {
+                // Recorrente - não tem fim definido
+                return {
+                    firstInstallment: `${day}/${startMonth + 1}/${startYear}`,
+                    lastInstallment: 'Recorrente',
+                    endMonth: null,
+                    endYear: null
+                };
+            }
+            
             let endMonth = startMonth + installments - 1;
             let endYear = startYear;
             
@@ -858,258 +967,453 @@
                 endYear++;
             }
             
+            return {
+                firstInstallment: `${day}/${startMonth + 1}/${startYear}`,
+                lastInstallment: `${day}/${endMonth + 1}/${endYear}`,
+                endMonth: endMonth,
+                endYear: endYear
+            };
+        }
+
+        // Salvar no localStorage
+        function savePurchases() {
+            localStorage.setItem('finanbot_purchases', JSON.stringify(purchases));
+        }
+
+        // Salvar fechamentos dos cartões
+        function saveClosingDates() {
+            localStorage.setItem('finanbot_closing_dates', JSON.stringify(savedClosingDates));
+        }
+
+        // Calcular dados dos gráficos
+        function calculateChartData() {
+            const categoryData = {};
+            const cardData = {};
+            const monthData = {};
+            
+            purchases.forEach(purchase => {
+                const value = Math.round(purchase.totalValue);
+                
+                // Categoria
+                categoryData[purchase.category] = (categoryData[purchase.category] || 0) + value;
+                
+                // Cartão
+                cardData[purchase.card] = (cardData[purchase.card] || 0) + value;
+                
+                // Mês (baseado na última parcela)
+                const monthKey = `${purchase.dates.endMonth + 1}/${purchase.dates.endYear}`;
+                monthData[monthKey] = (monthData[monthKey] || 0) + value;
+            });
+            
+            return { categoryData, cardData, monthData };
+        }
+
+        // Criar gráficos
+        function createCharts() {
+            const { categoryData, cardData, monthData } = calculateChartData();
+            
+            // Gráfico de categorias
+            categoryChart = new Chart(document.getElementById('categoryChart'), {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(categoryData),
+                    datasets: [{
+                        data: Object.values(categoryData),
+                        backgroundColor: ['#00C896', '#1E3557', '#FF6B6B', '#4ECDC4', '#45B7D1'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': R$ ' + context.parsed.toLocaleString('pt-BR');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de cartões
+            const cardLabels = Object.keys(cardData);
+            const cardColors_array = cardLabels.map(card => cardColors[card] || '#6C757D');
+            
+            cardChart = new Chart(document.getElementById('cardChart'), {
+                type: 'pie',
+                data: {
+                    labels: cardLabels,
+                    datasets: [{
+                        data: Object.values(cardData),
+                        backgroundColor: cardColors_array,
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': R$ ' + context.parsed.toLocaleString('pt-BR');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico mensal
+            const sortedMonths = Object.keys(monthData).sort((a, b) => {
+                const [monthA, yearA] = a.split('/').map(Number);
+                const [monthB, yearB] = b.split('/').map(Number);
+                return yearA - yearB || monthA - monthB;
+            });
+            
+            monthChart = new Chart(document.getElementById('monthChart'), {
+                type: 'pie',
+                data: {
+                    labels: sortedMonths,
+                    datasets: [{
+                        data: sortedMonths.map(month => monthData[month]),
+                        backgroundColor: sortedMonths.map((_, index) => 
+                            `hsl(${(index * 360 / sortedMonths.length)}, 70%, 60%)`
+                        ),
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': R$ ' + context.parsed.toLocaleString('pt-BR');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Atualizar gráficos
+        function updateCharts() {
+            const { categoryData, cardData, monthData } = calculateChartData();
+            
+            // Atualizar categoria
+            categoryChart.data.labels = Object.keys(categoryData);
+            categoryChart.data.datasets[0].data = Object.values(categoryData);
+            categoryChart.update();
+            
+            // Atualizar cartão
+            const cardLabels = Object.keys(cardData);
+            const cardColors_array = cardLabels.map(card => cardColors[card] || '#6C757D');
+            cardChart.data.labels = cardLabels;
+            cardChart.data.datasets[0].data = Object.values(cardData);
+            cardChart.data.datasets[0].backgroundColor = cardColors_array;
+            cardChart.update();
+            
+            // Atualizar mensal
+            const sortedMonths = Object.keys(monthData).sort((a, b) => {
+                const [monthA, yearA] = a.split('/').map(Number);
+                const [monthB, yearB] = b.split('/').map(Number);
+                return yearA - yearB || monthA - monthB;
+            });
+            
+            monthChart.data.labels = sortedMonths;
+            monthChart.data.datasets[0].data = sortedMonths.map(month => monthData[month]);
+            monthChart.data.datasets[0].backgroundColor = sortedMonths.map((_, index) => 
+                `hsl(${(index * 360 / sortedMonths.length)}, 70%, 60%)`
+            );
+            monthChart.update();
+        }
+
+        // Renderizar histórico
+        function renderHistory() {
+            const historyContent = document.getElementById('historyContent');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            if (purchases.length === 0) {
+                historyContent.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">Nenhuma compra registrada ainda</div>';
+                downloadBtn.style.display = 'none';
+                return;
+            }
+            
+            downloadBtn.style.display = 'block';
+            const sortedPurchases = [...purchases].sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate));
+            
+            historyContent.innerHTML = sortedPurchases.map(purchase => `
+                <div class="history-item">
+                    <button class="delete-btn" onclick="deletePurchase('${purchase.id}')" title="Excluir compra">×</button>
+                    <h4>${purchase.itemName}</h4>
+                    <div class="history-details">
+                        <div class="history-detail"><strong>Valor:</strong> R$ ${Math.round(purchase.totalValue).toLocaleString('pt-BR')}</div>
+                        <div class="history-detail"><strong>Categoria:</strong> ${purchase.category}</div>
+                        <div class="history-detail"><strong>Cartão:</strong> ${purchase.card}</div>
+                        <div class="history-detail"><strong>Data da Compra:</strong> ${new Date(purchase.purchaseDate).toLocaleDateString('pt-BR')}</div>
+                        <div class="history-detail"><strong>Parcelas:</strong> ${purchase.installments === 1 ? 'À Vista' : purchase.installments === 'recorrente' ? 'Recorrente' : purchase.installments + 'x'}</div>
+                        <div class="history-detail"><strong>Primeira:</strong> ${purchase.dates.firstInstallment}</div>
+                        <div class="history-detail"><strong>Última:</strong> ${purchase.dates.lastInstallment}</div>
+                        ${purchase.closingDate ? `<div class="history-detail"><strong>Fechamento:</strong> Dia ${purchase.closingDate}</div>` : ''}
+                        <div class="history-detail"><strong>Registrado:</strong> ${new Date(purchase.registrationDate).toLocaleDateString('pt-BR')}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Renderizar resumo mensal completo
+        function renderMonthlySummary() {
+            const content = document.getElementById('monthlySummaryContent');
+            
+            if (purchases.length === 0) {
+                content.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">Nenhuma compra registrada ainda</div>';
+                return;
+            }
+            
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            
             const months = [
                 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
             ];
             
-            return {
-                firstInstallment: `${months[startMonth]}/${startYear}`,
-                lastInstallment: `${months[endMonth]}/${endYear}`
-            };
-        }
-
-        // Função para atualizar os gráficos
-        function updateCharts() {
-            categoryChart.data.datasets[0].data = Object.values(categoryData);
-            categoryChart.update();
+            // Agrupar por mês de término (excluir recorrentes)
+            const groupedByMonth = {};
             
-            cardChart.data.datasets[0].data = Object.values(cardData);
-            cardChart.update();
-            
-            // Ordena os meses cronologicamente
-            const sortedMonths = Object.keys(monthData).sort((a, b) => {
-                const [monthA, yearA] = a.split('/');
-                const [monthB, yearB] = b.split('/');
-                const dateA = new Date(parseInt(yearA), getMonthNumber(monthA));
-                const dateB = new Date(parseInt(yearB), getMonthNumber(monthB));
-                return dateA - dateB;
-            });
-            
-            monthChart.data.labels = sortedMonths;
-            monthChart.data.datasets[0].data = sortedMonths.map(month => monthData[month]);
-            monthChart.update();
-        }
-
-        // Função auxiliar para converter nome do mês em número
-        function getMonthNumber(monthName) {
-            const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-            return months.indexOf(monthName);
-        }
-
-        // Função para renderizar o histórico de compras
-        function renderPurchaseHistory() {
-            const historyContainer = document.getElementById('purchaseHistory');
-            
-            if (purchases.length === 0) {
-                historyContainer.innerHTML = `
-                    <div class="empty-history">
-                        <p>Nenhuma compra registrada ainda. Adicione sua primeira compra acima! 🛍️</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const historyHTML = purchases.map((purchase, index) => `
-                <div class="purchase-item">
-                    <div class="purchase-header">
-                        <h4 class="purchase-title">${purchase.itemName}</h4>
-                        <div class="purchase-value">R$ ${Math.round(purchase.totalValue).toLocaleString('pt-BR')}</div>
-                    </div>
-                    
-                    <div class="purchase-details">
-                        <div class="purchase-detail">
-                            <span class="purchase-detail-label">Categoria</span>
-                            <span class="purchase-detail-value">${purchase.category}</span>
-                        </div>
-                        <div class="purchase-detail">
-                            <span class="purchase-detail-label">Cartão</span>
-                            <span class="purchase-detail-value">${purchase.card}</span>
-                        </div>
-                        <div class="purchase-detail">
-                            <span class="purchase-detail-label">Mês da Compra</span>
-                            <span class="purchase-detail-value">${purchase.purchaseMonth ? new Date(purchase.purchaseMonth + '-01').toLocaleDateString('pt-BR', {month: 'long', year: 'numeric'}) : 'N/A'}</span>
-                        </div>
-                        <div class="purchase-detail">
-                            <span class="purchase-detail-label">Data de Registro</span>
-                            <span class="purchase-detail-value">${purchase.registrationDate}</span>
-                        </div>
-                        <div class="purchase-detail">
-                            <span class="purchase-detail-label">Primeira Parcela</span>
-                            <span class="purchase-detail-value">${purchase.firstInstallment}</span>
-                        </div>
-                        <div class="purchase-detail">
-                            <span class="purchase-detail-label">Última Parcela</span>
-                            <span class="purchase-detail-value">${purchase.lastInstallment}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="purchase-installments">
-                        ${purchase.installments === 0 ? 'À Vista - R$ ' + Math.round(purchase.totalValue).toLocaleString('pt-BR') : purchase.installments + 'x de R$ ' + Math.round(purchase.totalValue/purchase.installments).toLocaleString('pt-BR')}
-                    </div>
-                    
-                    <button class="delete-btn" onclick="deletePurchase(${index})">🗑️ Excluir</button>
-                </div>
-            `).join('');
-
-            historyContainer.innerHTML = historyHTML;
-        }
-
-        // Função para renderizar parcelas que terminam
-        function renderEndingInstallments() {
-            const endingContainer = document.getElementById('endingInstallments');
-            
-            if (purchases.length === 0) {
-                endingContainer.innerHTML = `
-                    <div class="empty-history">
-                        <p>Nenhuma parcela registrada ainda! 📋</p>
-                    </div>
-                `;
-                return;
-            }
-
-            // Organiza parcelas por mês de término (apenas parcelas que realmente terminam)
-            const endingByMonth = {};
-            const currentDate = new Date();
-            const currentMonth = currentDate.getMonth();
-            const currentYear = currentDate.getFullYear();
-
             purchases.forEach(purchase => {
-                // Só inclui se tiver parcelas (não à vista) ou se for à vista no mês atual
-                if (purchase.installments === 0) {
-                    // Para compras à vista, só mostra se for no mês atual
-                    const purchaseDate = parseInstallmentDate(purchase.firstInstallment);
-                    if (purchaseDate.getMonth() === currentMonth && purchaseDate.getFullYear() === currentYear) {
-                        const monthKey = `${purchaseDate.getFullYear()}-${String(purchaseDate.getMonth() + 1).padStart(2, '0')}`;
-                        
-                        if (!endingByMonth[monthKey]) {
-                            endingByMonth[monthKey] = {
-                                date: purchaseDate,
-                                displayName: purchase.firstInstallment,
-                                items: [],
-                                total: 0
-                            };
-                        }
-                        
-                        endingByMonth[monthKey].items.push({
-                            name: purchase.itemName,
-                            card: purchase.card,
-                            installmentValue: purchase.totalValue,
-                            totalValue: purchase.totalValue,
-                            installments: purchase.installments,
-                            isVista: true
-                        });
-                        endingByMonth[monthKey].total += purchase.totalValue;
-                    }
-                } else {
-                    // Para compras parceladas, só mostra no mês da última parcela
-                    const lastInstallmentDate = parseInstallmentDate(purchase.lastInstallment);
-                    const monthKey = `${lastInstallmentDate.getFullYear()}-${String(lastInstallmentDate.getMonth() + 1).padStart(2, '0')}`;
-                    
-                    if (!endingByMonth[monthKey]) {
-                        endingByMonth[monthKey] = {
-                            date: lastInstallmentDate,
-                            displayName: purchase.lastInstallment,
-                            items: [],
-                            total: 0
-                        };
-                    }
-                    
-                    const installmentValue = purchase.totalValue / purchase.installments;
-                    endingByMonth[monthKey].items.push({
-                        name: purchase.itemName,
-                        card: purchase.card,
-                        installmentValue: installmentValue,
-                        totalValue: purchase.totalValue,
-                        installments: purchase.installments,
-                        isVista: false
-                    });
-                    endingByMonth[monthKey].total += installmentValue;
-                }
-            });
-
-            // Ordena os meses
-            const sortedMonths = Object.keys(endingByMonth).sort((a, b) => {
-                return endingByMonth[a].date - endingByMonth[b].date;
-            });
-
-            if (sortedMonths.length === 0) {
-                endingContainer.innerHTML = `
-                    <div class="empty-history">
-                        <p>Nenhuma parcela registrada ainda! 📋</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const endingHTML = sortedMonths.map(monthKey => {
-                const monthData = endingByMonth[monthKey];
-                const monthDate = monthData.date;
-                const isCurrentMonth = monthDate.getMonth() === currentMonth && monthDate.getFullYear() === currentYear;
-                const isPastMonth = monthDate < new Date(currentYear, currentMonth, 1);
+                // Pular compras recorrentes no resumo mensal
+                if (purchase.installments === 'recorrente') return;
                 
-                let headerClass = 'month-header';
-                let statusText = 'Termina';
+                const endMonth = purchase.dates.endMonth;
+                const endYear = purchase.dates.endYear;
+                const monthKey = `${endYear}-${endMonth}`;
                 
-                if (isCurrentMonth) {
-                    headerClass += ' current-month';
-                    statusText = 'Termina este mês';
-                } else if (isPastMonth) {
-                    headerClass += ' past-month';
-                    statusText = 'Já terminou';
+                if (!groupedByMonth[monthKey]) {
+                    groupedByMonth[monthKey] = {
+                        month: endMonth,
+                        year: endYear,
+                        purchases: [],
+                        total: 0
+                    };
                 }
-
-                const itemsHTML = monthData.items.map(item => `
-                    <div class="installment-item">
-                        <div class="installment-info">
-                            <div class="installment-name">${item.name}</div>
-                            <div class="installment-details">
-                                ${item.card} • ${item.isVista ? 'À Vista' : item.installments + 'x de R$ ' + Math.round(item.installmentValue).toLocaleString('pt-BR')}
-                                ${isCurrentMonth ? '<span class="status-badge status-current">TERMINA AGORA</span>' : ''}
-                                ${isPastMonth ? '<span class="status-badge status-finished">FINALIZADA</span>' : ''}
+                
+                groupedByMonth[monthKey].purchases.push(purchase);
+                groupedByMonth[monthKey].total += Math.round(purchase.totalValue);
+            });
+            
+            // Ordenar por data
+            const sortedMonths = Object.keys(groupedByMonth).sort((a, b) => {
+                const [yearA, monthA] = a.split('-').map(Number);
+                const [yearB, monthB] = b.split('-').map(Number);
+                return yearA - yearB || monthA - monthB;
+            });
+            
+            content.innerHTML = sortedMonths.map(monthKey => {
+                const group = groupedByMonth[monthKey];
+                const isPast = group.year < currentYear || (group.year === currentYear && group.month < currentMonth);
+                const isCurrent = group.year === currentYear && group.month === currentMonth;
+                const isFuture = group.year > currentYear || (group.year === currentYear && group.month > currentMonth);
+                
+                let headerClass = 'future';
+                let badgeClass = 'future';
+                let statusText = 'Futuro';
+                
+                if (isPast) {
+                    headerClass = 'past';
+                    badgeClass = 'past';
+                    statusText = 'Finalizado';
+                } else if (isCurrent) {
+                    headerClass = 'current';
+                    badgeClass = 'current';
+                    statusText = 'Mês Atual';
+                }
+                
+                const count = group.purchases.length;
+                const averageValue = Math.round(group.total / count);
+                
+                return `
+                    <div class="summary-card" style="margin-bottom: 25px;">
+                        <div class="summary-header ${headerClass}">
+                            <h4>${months[group.month]} ${group.year}</h4>
+                            <div class="summary-badge ${badgeClass}">${statusText}</div>
+                        </div>
+                        <div class="summary-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Parcelas que terminam</div>
+                                <div class="stat-value">${count}</div>
+                            </div>
+                            <div class="stat-item ${isCurrent ? 'highlight' : ''}">
+                                <div class="stat-label">${isCurrent ? '💸 Você vai economizar' : isPast ? '💰 Economizou' : '🎯 Vai economizar'}</div>
+                                <div class="stat-value ${isCurrent ? 'large' : ''}">R$ ${group.total.toLocaleString('pt-BR')}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Valor médio por parcela</div>
+                                <div class="stat-value">R$ ${averageValue.toLocaleString('pt-BR')}</div>
                             </div>
                         </div>
-                        <div class="installment-value">
-                            R$ ${Math.round(item.installmentValue).toLocaleString('pt-BR')}
-                        </div>
-                    </div>
-                `).join('');
-
-                return `
-                    <div class="month-group">
-                        <div class="${headerClass}">
-                            <span>${monthData.displayName} - ${statusText}</span>
-                            <span class="month-total">Total: R$ ${Math.round(monthData.total).toLocaleString('pt-BR')}</span>
-                        </div>
-                        <div class="installment-list">
-                            ${itemsHTML}
+                        <div class="month-details">
+                            ${group.purchases.map(purchase => `
+                                <div class="detail-item">
+                                    <div>
+                                        <div class="detail-name">${purchase.itemName}</div>
+                                        <div class="detail-info">${purchase.card} • ${purchase.installments === 1 ? 'À Vista' : purchase.installments + 'x'}</div>
+                                    </div>
+                                    <div class="detail-value">R$ ${Math.round(purchase.totalValue).toLocaleString('pt-BR')}</div>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
                 `;
             }).join('');
-
-            endingContainer.innerHTML = endingHTML;
         }
 
-        // Função para excluir uma compra
-        function deletePurchase(index) {
+        // Renderizar parcelas que terminam
+        function renderInstallmentsEnding() {
+            const content = document.getElementById('installmentsEndingContent');
+            
+            if (purchases.length === 0) {
+                content.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">Nenhuma compra registrada ainda</div>';
+                return;
+            }
+            
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            
+            // Agrupar por mês de término (excluir recorrentes)
+            const groupedByMonth = {};
+            
+            purchases.forEach(purchase => {
+                // Pular compras recorrentes no resumo mensal
+                if (purchase.installments === 'recorrente') return;
+                
+                const endMonth = purchase.dates.endMonth;
+                const endYear = purchase.dates.endYear;
+                const monthKey = `${endYear}-${endMonth}`;
+                
+                if (!groupedByMonth[monthKey]) {
+                    groupedByMonth[monthKey] = {
+                        month: endMonth,
+                        year: endYear,
+                        purchases: [],
+                        total: 0
+                    };
+                }
+                
+                groupedByMonth[monthKey].purchases.push(purchase);
+                groupedByMonth[monthKey].total += Math.round(purchase.totalValue);
+            });
+            
+            // Ordenar por data
+            const sortedMonths = Object.keys(groupedByMonth).sort((a, b) => {
+                const [yearA, monthA] = a.split('-').map(Number);
+                const [yearB, monthB] = b.split('-').map(Number);
+                return yearA - yearB || monthA - monthB;
+            });
+            
+            const months = [
+                'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+            ];
+            
+            content.innerHTML = sortedMonths.map(monthKey => {
+                const group = groupedByMonth[monthKey];
+                const isPast = group.year < currentYear || (group.year === currentYear && group.month < currentMonth);
+                const isCurrent = group.year === currentYear && group.month === currentMonth;
+                const isFuture = group.year > currentYear || (group.year === currentYear && group.month > currentMonth);
+                
+                let headerClass = 'future';
+                let badgeClass = 'future';
+                let statusText = 'Futuro';
+                
+                if (isPast) {
+                    headerClass = 'past';
+                    badgeClass = 'past';
+                    statusText = 'Finalizado';
+                } else if (isCurrent) {
+                    headerClass = 'current';
+                    badgeClass = 'current';
+                    statusText = 'Termina este mês';
+                }
+                
+                return `
+                    <div class="month-group">
+                        <div class="month-header ${headerClass}">
+                            <span>${months[group.month]} ${group.year}</span>
+                            <span class="month-total">R$ ${group.total.toLocaleString('pt-BR')}</span>
+                        </div>
+                        ${group.purchases.map(purchase => `
+                            <div class="installment-item">
+                                <div class="installment-info">
+                                    <div class="installment-name">${purchase.itemName}</div>
+                                    <div class="installment-details">
+                                        ${purchase.card} • ${purchase.installments === 1 ? 'À Vista' : purchase.installments + 'x de R$ ' + Math.round(purchase.totalValue / purchase.installments).toLocaleString('pt-BR')}
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="installment-value">R$ ${Math.round(purchase.totalValue).toLocaleString('pt-BR')}</span>
+                                    <span class="badge ${badgeClass}">${statusText}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Excluir compra
+        function deletePurchase(id) {
             if (confirm('Tem certeza que deseja excluir esta compra?')) {
-                purchases.splice(index, 1);
+                purchases = purchases.filter(p => p.id !== id);
                 savePurchases();
-                recalculateChartData();
                 updateCharts();
-                renderPurchaseHistory();
-                renderEndingInstallments();
+                renderHistory();
+                renderMonthlySummary();
+                renderInstallmentsEnding();
             }
         }
 
-        // Função para inicializar a aplicação
-        function initializeApp() {
-            recalculateChartData();
-            updateCharts();
-            renderPurchaseHistory();
-            renderEndingInstallments();
-        }
+        // Preencher automaticamente o fechamento baseado no cartão selecionado
+        document.getElementById('card').addEventListener('change', function() {
+            const selectedCard = this.value;
+            const closingDateSelect = document.getElementById('closingDate');
+            
+            if (selectedCard && savedClosingDates[selectedCard]) {
+                closingDateSelect.value = savedClosingDates[selectedCard];
+            }
+        });
 
         // Manipulador do formulário
         document.getElementById('financeForm').addEventListener('submit', function(e) {
@@ -1119,94 +1423,75 @@
             const totalValue = parseFloat(document.getElementById('totalValue').value);
             const category = document.getElementById('category').value;
             const card = document.getElementById('card').value;
+            const purchaseDate = document.getElementById('purchaseDate').value;
             const billClosed = document.getElementById('billClosed').value;
-            const purchaseMonth = document.getElementById('purchaseMonth').value;
-            const installments = parseInt(document.getElementById('installments').value);
+            const installmentsValue = document.getElementById('installments').value;
+            const closingDate = document.getElementById('closingDate').value;
             
-            // Calcula as datas das parcelas
-            const dates = calculateInstallmentDates(billClosed, installments, purchaseMonth);
+            const installments = installmentsValue === 'recorrente' ? 'recorrente' : parseInt(installmentsValue);
+            const dates = calculateInstallmentDates(purchaseDate, billClosed, installments, closingDate);
             
-            // Cria o objeto da compra
             const purchase = {
-                id: Date.now(),
+                id: Date.now().toString(),
                 itemName,
                 totalValue,
                 category,
                 card,
+                purchaseDate,
                 billClosed,
-                purchaseMonth,
                 installments,
-                firstInstallment: dates.firstInstallment,
-                lastInstallment: dates.lastInstallment,
-                registrationDate: new Date().toLocaleDateString('pt-BR')
+                closingDate,
+                dates,
+                registrationDate: new Date().toISOString()
             };
             
-            // Adiciona a compra ao array
+            // Salvar o fechamento do cartão para uso futuro
+            if (closingDate && card) {
+                savedClosingDates[card] = closingDate;
+                saveClosingDates();
+            }
+
             purchases.push(purchase);
-            
-            // Salva no localStorage
             savePurchases();
-            
-            // Recalcula e atualiza os gráficos
-            recalculateChartData();
             updateCharts();
+            renderHistory();
+            renderMonthlySummary();
+            renderInstallmentsEnding();
             
-            // Atualiza o histórico
-            renderPurchaseHistory();
-            
-            // Atualiza as parcelas que terminam
-            renderEndingInstallments();
-            
-            // Exibe o resultado
+            // Exibir resultado
             const resultContainer = document.getElementById('resultContainer');
-            const resultDetails = document.getElementById('resultDetails');
+            const resultContent = document.getElementById('resultContent');
             
-            resultDetails.innerHTML = `
-                <div class="result-item">
-                    <strong>Item:</strong>
-                    ${itemName}
-                </div>
-                <div class="result-item">
-                    <strong>Valor Total:</strong>
-                    R$ ${Math.round(totalValue).toLocaleString('pt-BR')}
-                </div>
-                <div class="result-item">
-                    <strong>Categoria:</strong>
-                    ${category}
-                </div>
-                <div class="result-item">
-                    <strong>Cartão:</strong>
-                    ${card}
-                </div>
-                <div class="result-item">
-                    <strong>Mês da Compra:</strong>
-                    ${new Date(purchaseMonth + '-01').toLocaleDateString('pt-BR', {month: 'long', year: 'numeric'})}
-                </div>
-                <div class="result-item">
-                    <strong>Parcelas:</strong>
-                    ${installments === 0 ? 'À Vista' : installments + 'x de R$ ' + Math.round(totalValue/installments).toLocaleString('pt-BR')}
-                </div>
-                <div class="result-item">
-                    <strong>Primeira Parcela:</strong>
-                    ${dates.firstInstallment}
-                </div>
-                <div class="result-item">
-                    <strong>Última Parcela:</strong>
-                    ${dates.lastInstallment}
-                </div>
+            const installmentText = installments === 1 ? 'À Vista' : 
+                                   installments === 'recorrente' ? 'Recorrente (mensal)' : 
+                                   installments + 'x de R$ ' + Math.round(totalValue/installments).toLocaleString('pt-BR');
+            
+            resultContent.innerHTML = `
+                <div class="result-item"><strong>📦 Item:</strong> ${itemName}</div>
+                <div class="result-item"><strong>💰 Valor Total:</strong> R$ ${Math.round(totalValue).toLocaleString('pt-BR')}</div>
+                <div class="result-item"><strong>🏷️ Categoria:</strong> ${category}</div>
+                <div class="result-item"><strong>💳 Cartão:</strong> ${card}</div>
+                <div class="result-item"><strong>📊 Parcelas:</strong> ${installmentText}</div>
+                <div class="result-item"><strong>📅 Primeira Parcela:</strong> ${dates.firstInstallment}</div>
+                <div class="result-item"><strong>🏁 Última Parcela:</strong> ${dates.lastInstallment}</div>
+                ${closingDate ? `<div class="result-item"><strong>📋 Fechamento:</strong> Dia ${closingDate} do mês</div>` : ''}
             `;
             
             resultContainer.style.display = 'block';
-            
-            // Limpa o formulário
             this.reset();
-            
-            // Scroll suave para o histórico
-            document.querySelector('.history-container').scrollIntoView({ behavior: 'smooth' });
+            setCurrentDate();
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Inicializa a aplicação quando a página carrega
-        window.addEventListener('load', initializeApp);
+        // Inicialização
+        populateInstallmentsDropdown();
+        populateClosingDatesDropdown();
+        setCurrentDate();
+        loadSavedTheme();
+        createCharts();
+        renderHistory();
+        renderMonthlySummary();
+        renderInstallmentsEnding();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a8185b11bd1ab7',t:'MTc1OTc4NDQ5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a8966b9267877a',t:'MTc1OTc4OTY2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
