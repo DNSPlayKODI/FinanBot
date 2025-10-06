@@ -580,6 +580,17 @@ Preencha os dados abaixo e eu direi quando termina sua última parcela, além de
 
 <div class="ending-installments-container">
 <div class="chart-block">
+<h3>💰 Resumo do Mês Atual</h3>
+<div id="monthSummary" class="month-summary">
+<div class="empty-history">
+<p>Nenhuma parcela registrada ainda! 📋</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="ending-installments-container">
+<div class="chart-block">
 <h3>🎯 Parcelas que Terminam</h3>
 <div id="endingInstallments" class="ending-installments">
 <div class="empty-history">
@@ -695,7 +706,7 @@ labels: Object.keys(categoryData),
 datasets: [{
 label: 'Total (R$)',
 data: Object.values(categoryData),
-backgroundColor: ['#00C896', '#1E3557', '#FFD700', '#DC143C', '#8A2BE2'],
+backgroundColor: ['#2ecc71', '#e74c3c', '#f39c12', '#3498db', '#9b59b6'],
 borderColor: '#ffffff',
 borderWidth: 3,
 }]
@@ -732,18 +743,18 @@ datasets: [{
 label: 'Total (R$)',
 data: Object.values(cardData),
 backgroundColor: [
-'#8A05BE', // Nubank - Roxo característico
-'#FFD700', // Banco Do Brasil - Amarelo
-'#FF6B00', // C6 Bank - Laranja
-'#E31E24', // Havan - Vermelho
-'#FF1493', // Cartão Luiza - Rosa/Magenta
-'#8B4513', // Cartão Marisa - Marrom
-'#00AAFF', // MercadoPago - Azul claro
-'#11C76F', // PicPay - Verde
-'#FF7A00', // Inter - Laranja
-'#6C5CE7', // Way - Roxo claro
-'#E74C3C', // Lojas Renner - Vermelho
-'#6C757D' // Outro - Cinza
+'#8e44ad', // Nubank - Roxo
+'#f1c40f', // Banco Do Brasil - Amarelo
+'#2c3e50', // C6 Bank - Cinza escuro
+'#e67e22', // Havan - Laranja
+'#e91e63', // Cartão Luiza - Rosa
+'#795548', // Cartão Marisa - Marrom
+'#00bcd4', // MercadoPago - Ciano
+'#4caf50', // PicPay - Verde
+'#ff5722', // Inter - Laranja avermelhado
+'#607d8b', // Way - Azul acinzentado
+'#9c27b0', // Lojas Renner - Roxo
+'#34495e' // Outro - Cinza
 ],
 borderColor: '#ffffff',
 borderWidth: 3,
@@ -780,8 +791,8 @@ labels: [],
 datasets: [{
 label: 'Total (R$)',
 data: [],
-backgroundColor: '#1E3557',
-borderColor: '#0f1a2e',
+backgroundColor: '#2ecc71',
+borderColor: '#27ae60',
 borderWidth: 2,
 borderRadius: 8,
 borderSkipped: false,
@@ -955,6 +966,103 @@ ${purchase.installments === 0 ? 'À Vista - R$ ' + Math.round(purchase.totalValu
 historyContainer.innerHTML = historyHTML;
 }
 
+// Função para renderizar resumo do mês atual
+function renderMonthSummary() {
+const summaryContainer = document.getElementById('monthSummary');
+
+if (purchases.length === 0) {
+summaryContainer.innerHTML = `
+<div class="empty-history">
+<p>Nenhuma parcela registrada ainda! 📋</p>
+</div>
+`;
+return;
+}
+
+const currentDate = new Date();
+const currentMonth = currentDate.getMonth();
+const currentYear = currentDate.getFullYear();
+
+let totalCurrentMonth = 0;
+let totalEnding = 0;
+let totalContinuing = 0;
+let endingCount = 0;
+let continuingCount = 0;
+
+purchases.forEach(purchase => {
+if (purchase.installments === 0) {
+// Compra à vista
+const purchaseDate = parseInstallmentDate(purchase.firstInstallment);
+if (purchaseDate.getMonth() === currentMonth && purchaseDate.getFullYear() === currentYear) {
+totalCurrentMonth += purchase.totalValue;
+totalEnding += purchase.totalValue;
+endingCount++;
+}
+} else {
+// Compra parcelada
+const installmentValue = purchase.totalValue / purchase.installments;
+const firstInstallmentDate = parseInstallmentDate(purchase.firstInstallment);
+const lastInstallmentDate = parseInstallmentDate(purchase.lastInstallment);
+
+// Verifica se tem parcela no mês atual
+let hasCurrentMonthInstallment = false;
+for (let i = 0; i < purchase.installments; i++) {
+const installmentDate = new Date(firstInstallmentDate);
+installmentDate.setMonth(installmentDate.getMonth() + i);
+
+if (installmentDate.getMonth() === currentMonth && installmentDate.getFullYear() === currentYear) {
+hasCurrentMonthInstallment = true;
+totalCurrentMonth += installmentValue;
+
+// Verifica se é a última parcela
+if (lastInstallmentDate.getMonth() === currentMonth && lastInstallmentDate.getFullYear() === currentYear) {
+totalEnding += installmentValue;
+endingCount++;
+} else {
+totalContinuing += installmentValue;
+continuingCount++;
+}
+break;
+}
+}
+}
+});
+
+const monthNames = [
+'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+];
+
+const summaryHTML = `
+<div class="summary-card">
+<div class="summary-header">
+<h4 class="summary-title">${monthNames[currentMonth]} ${currentYear}</h4>
+<div class="summary-total">R$ ${Math.round(totalCurrentMonth).toLocaleString('pt-BR')}</div>
+</div>
+
+<div class="summary-breakdown">
+<div class="breakdown-item">
+<div class="breakdown-label">Parcelas que Terminam</div>
+<div class="breakdown-value">R$ ${Math.round(totalEnding).toLocaleString('pt-BR')}</div>
+<div class="breakdown-label">${endingCount} item${endingCount !== 1 ? 's' : ''}</div>
+</div>
+<div class="breakdown-item">
+<div class="breakdown-label">Parcelas Continuam</div>
+<div class="breakdown-value">R$ ${Math.round(totalContinuing).toLocaleString('pt-BR')}</div>
+<div class="breakdown-label">${continuingCount} item${continuingCount !== 1 ? 's' : ''}</div>
+</div>
+<div class="breakdown-item">
+<div class="breakdown-label">Total de Itens</div>
+<div class="breakdown-value">${endingCount + continuingCount}</div>
+<div class="breakdown-label">parcelas ativas</div>
+</div>
+</div>
+</div>
+`;
+
+summaryContainer.innerHTML = summaryHTML;
+}
+
 // Função para renderizar parcelas que terminam
 function renderEndingInstallments() {
 const endingContainer = document.getElementById('endingInstallments');
@@ -1099,6 +1207,7 @@ savePurchases();
 recalculateChartData();
 updateCharts();
 renderPurchaseHistory();
+renderMonthSummary();
 renderEndingInstallments();
 }
 }
@@ -1108,6 +1217,7 @@ function initializeApp() {
 recalculateChartData();
 updateCharts();
 renderPurchaseHistory();
+renderMonthSummary();
 renderEndingInstallments();
 }
 
@@ -1153,6 +1263,9 @@ updateCharts();
 
 // Atualiza o histórico
 renderPurchaseHistory();
+
+// Atualiza o resumo mensal
+renderMonthSummary();
 
 // Atualiza as parcelas que terminam
 renderEndingInstallments();
@@ -1208,5 +1321,5 @@ document.querySelector('.history-container').scrollIntoView({ behavior: 'smooth'
 // Inicializa a aplicação quando a página carrega
 window.addEventListener('load', initializeApp);
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a71dc615bf1ab7',t:'MTc1OTc3NDIzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a76ff3b4681ab7',t:'MTc1OTc3NzYwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
