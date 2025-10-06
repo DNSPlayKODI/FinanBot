@@ -709,8 +709,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="purchaseMonth">Mês da Compra</label>
-                        <input type="month" id="purchaseMonth" required>
+                        <label for="purchaseDate">Data da Compra</label>
+                        <input type="date" id="purchaseDate" required>
                     </div>
 
                     <div class="form-group">
@@ -881,7 +881,7 @@
             if (purchases.length === 0) return;
             
             const headers = [
-                'Item', 'Valor Total', 'Categoria', 'Cartão', 'Mês da Compra', 
+                'Item', 'Valor Total', 'Categoria', 'Cartão', 'Data da Compra', 
                 'Fatura Fechada', 'Parcelas', 'Primeira Parcela', 'Última Parcela',
                 'Dia Fechamento', 'Data Registro'
             ];
@@ -893,7 +893,7 @@
                     purchase.totalValue.toFixed(2).replace('.', ','),
                     `"${purchase.category}"`,
                     `"${purchase.card}"`,
-                    `"${purchase.purchaseMonth}"`,
+                    `"${new Date(purchase.purchaseDate).toLocaleDateString('pt-BR')}"`,
                     purchase.billClosed === 'sim' ? 'Sim' : 'Não',
                     purchase.installments === 'recorrente' ? 'Recorrente' : 
                     purchase.installments === 1 ? 'À Vista' : `${purchase.installments}x`,
@@ -918,16 +918,16 @@
             document.body.removeChild(link);
         }
 
-        // Definir mês atual como padrão
-        function setCurrentMonth() {
+        // Definir data atual como padrão
+        function setCurrentDate() {
             const now = new Date();
-            const currentMonth = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
-            document.getElementById('purchaseMonth').value = currentMonth;
+            const currentDate = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+            document.getElementById('purchaseDate').value = currentDate;
         }
 
         // Calcular datas das parcelas
-        function calculateInstallmentDates(purchaseMonth, billClosed, installments, closingDate) {
-            const [year, month] = purchaseMonth.split('-').map(Number);
+        function calculateInstallmentDates(purchaseDate, billClosed, installments, closingDate) {
+            const [year, month, day] = purchaseDate.split('-').map(Number);
             let startMonth = month - 1; // JavaScript usa 0-11 para meses
             let startYear = year;
             
@@ -942,8 +942,8 @@
             if (installments === 1) {
                 // À vista - termina no mesmo mês da compra
                 return {
-                    firstInstallment: `${month}/${year}`,
-                    lastInstallment: `${month}/${year}`,
+                    firstInstallment: `${day}/${month}/${year}`,
+                    lastInstallment: `${day}/${month}/${year}`,
                     endMonth: month - 1,
                     endYear: year
                 };
@@ -952,7 +952,7 @@
             if (installments === 'recorrente') {
                 // Recorrente - não tem fim definido
                 return {
-                    firstInstallment: `${startMonth + 1}/${startYear}`,
+                    firstInstallment: `${day}/${startMonth + 1}/${startYear}`,
                     lastInstallment: 'Recorrente',
                     endMonth: null,
                     endYear: null
@@ -968,8 +968,8 @@
             }
             
             return {
-                firstInstallment: `${startMonth + 1}/${startYear}`,
-                lastInstallment: `${endMonth + 1}/${endYear}`,
+                firstInstallment: `${day}/${startMonth + 1}/${startYear}`,
+                lastInstallment: `${day}/${endMonth + 1}/${endYear}`,
                 endMonth: endMonth,
                 endYear: endYear
             };
@@ -1180,6 +1180,7 @@
                         <div class="history-detail"><strong>Valor:</strong> R$ ${Math.round(purchase.totalValue).toLocaleString('pt-BR')}</div>
                         <div class="history-detail"><strong>Categoria:</strong> ${purchase.category}</div>
                         <div class="history-detail"><strong>Cartão:</strong> ${purchase.card}</div>
+                        <div class="history-detail"><strong>Data da Compra:</strong> ${new Date(purchase.purchaseDate).toLocaleDateString('pt-BR')}</div>
                         <div class="history-detail"><strong>Parcelas:</strong> ${purchase.installments === 1 ? 'À Vista' : purchase.installments === 'recorrente' ? 'Recorrente' : purchase.installments + 'x'}</div>
                         <div class="history-detail"><strong>Primeira:</strong> ${purchase.dates.firstInstallment}</div>
                         <div class="history-detail"><strong>Última:</strong> ${purchase.dates.lastInstallment}</div>
@@ -1422,13 +1423,13 @@
             const totalValue = parseFloat(document.getElementById('totalValue').value);
             const category = document.getElementById('category').value;
             const card = document.getElementById('card').value;
-            const purchaseMonth = document.getElementById('purchaseMonth').value;
+            const purchaseDate = document.getElementById('purchaseDate').value;
             const billClosed = document.getElementById('billClosed').value;
             const installmentsValue = document.getElementById('installments').value;
             const closingDate = document.getElementById('closingDate').value;
             
             const installments = installmentsValue === 'recorrente' ? 'recorrente' : parseInt(installmentsValue);
-            const dates = calculateInstallmentDates(purchaseMonth, billClosed, installments, closingDate);
+            const dates = calculateInstallmentDates(purchaseDate, billClosed, installments, closingDate);
             
             const purchase = {
                 id: Date.now().toString(),
@@ -1436,7 +1437,7 @@
                 totalValue,
                 category,
                 card,
-                purchaseMonth,
+                purchaseDate,
                 billClosed,
                 installments,
                 closingDate,
@@ -1478,19 +1479,19 @@
             
             resultContainer.style.display = 'block';
             this.reset();
-            setCurrentMonth();
+            setCurrentDate();
             resultContainer.scrollIntoView({ behavior: 'smooth' });
         });
 
         // Inicialização
         populateInstallmentsDropdown();
         populateClosingDatesDropdown();
-        setCurrentMonth();
+        setCurrentDate();
         loadSavedTheme();
         createCharts();
         renderHistory();
         renderMonthlySummary();
         renderInstallmentsEnding();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a884d98196877a',t:'MTc1OTc4ODk0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a8966b9267877a',t:'MTc1OTc4OTY2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
